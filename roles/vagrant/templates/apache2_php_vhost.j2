@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        ServerName localhost
+
+        DocumentRoot /var/www/public
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride all
+                Options FollowSymLinks
+        </Directory>
+
+        <Directory /var/www/public>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride all
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+
+        LogLevel warn
+
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>

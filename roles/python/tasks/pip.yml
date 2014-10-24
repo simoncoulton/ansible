@@ -1,0 +1,7 @@
+---
+- name: pip | Install (apt)
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python-pip
+  tags:
+    - python

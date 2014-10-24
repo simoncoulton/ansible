@@ -1,0 +1,17 @@
+---
+  - name: Install zsh
+    apt: name={{item}} state=latest
+    with_items:
+     - zsh
+
+  - name: Remove standard zshrc
+    file: path={{ zsh_path_zshrc }} state=absent
+
+  - name: Copy .zshrc to users home directory
+    template: >
+      src=.zshrc.j2
+      dest={{ zsh_path_zshrc }}
+      owner={{ user }}
+    notify: change shell
+
+  - include: oh-my-zsh.yml

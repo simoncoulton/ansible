@@ -1,0 +1,9 @@
+{% for section, values in php_fpm_www_conf.iteritems() %}
+[{{ section }}]
+{% if values %}
+{% for key, value in values.iteritems() %}
+{{ key }} = {{ value }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}

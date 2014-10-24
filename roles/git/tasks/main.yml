@@ -1,0 +1,11 @@
+---
+  - name: Install
+    apt: name={{item}} state=latest
+    with_items:
+     - git
+
+  - name: Copy .gitconfig to home directory
+    template: >
+      src=.gitconfig.j2
+      dest={{ git_config_path }}
+      owner={{user}}

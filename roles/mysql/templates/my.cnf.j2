@@ -1,0 +1,11 @@
+{% for section, values in mysql_conf.iteritems() %}
+[{{ section }}]
+{% if values %}
+{% for key, value in values.iteritems() %}
+{{ key }}{% if value %} = {{ value }}{% endif %}
+
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+!includedir: /etc/mysql/conf.d/

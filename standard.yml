@@ -1,0 +1,10 @@
+---
+- name: Standard
+  hosts:
+    - all
+  roles:
+    - apt
+    - common
+    - git
+    - zsh
+    - sqlite

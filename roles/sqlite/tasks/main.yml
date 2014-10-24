@@ -1,0 +1,6 @@
+---
+- name: Install
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libsqlite{{ sqlite_version }}
+    - libsqlite{{ sqlite_dev }}

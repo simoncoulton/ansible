@@ -1,0 +1,11 @@
+---
+- include: standard.yml
+- include: web.yml
+- include: database.yml
+
+- name: Vagrant provisioning for local development
+  hosts:
+    - local
+  roles:
+    - vagrant
+    - { role: mysql-dev, when: "mysql" }

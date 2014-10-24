@@ -1,0 +1,16 @@
+#!/bin/bash
+# Run with:
+#    ./play production all
+#    ./play production webservers
+#    ./play production dbservers
+#    ./play production webservers --tags=pip
+
+
+INVENTORY=$1
+PLAYBOOK=${2:-"standard"}
+
+echo "Configuring ..."
+echo "inventory: ${INVENTORY}"
+echo "playbook: ${PLAYBOOK}"
+
+/usr/bin/env ansible-playbook --inventory-file=$INVENTORY "$(dirname $0)/${PLAYBOOK}.yml" --extra-vars="inventory_files=$PWD/inventory_files" "${@:3}"

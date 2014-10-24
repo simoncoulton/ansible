@@ -1,0 +1,14 @@
+---
+# Default variables, can be overridden in group_vars
+# 3 installs the latest 3.x version available, blank
+# installs latest 2.x
+python_apt_version: 3
+python_release_version: 3.4
+python_path_virtualenv: /home/{{ user }}/.virtualenvs
+# Create virtualenvs in python.paths.virtualenv for
+# the following versions. This will need to be adjusted
+# for any distro that installs 3.4 as python3
+# { version: '3.4', command: 'pyvenv-3.4' }
+python_virtualenvs:
+  - { version: '2.7', command: 'virtualenv' }
+  # - { version: '3.4', command: 'pyvenv-3.4' }

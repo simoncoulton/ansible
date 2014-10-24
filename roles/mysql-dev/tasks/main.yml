@@ -1,0 +1,12 @@
+---
+# Required for remote access
+- name: Install python mysql package
+  pip: name=MySQL-python
+  tags:
+    - mysql-dev
+
+- name: Allow remote access
+  mysql_user: name=root host={{ mysql_dev_hostname }} password={{ mysql_dev_password }} priv=*.*:ALL state=present
+  notify: restart mysql
+  tags:
+    - mysql-dev

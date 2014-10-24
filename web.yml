@@ -1,0 +1,13 @@
+---
+- name: Webserver provisioning
+  hosts:
+    - production
+    - staging
+    - local
+  vars_files:
+    - "{{ secure_dir }}/vars/web.yml"
+  roles:
+    - { role: nginx, when: "nginx" }
+    - { role: apache, when: "apache" }
+    - { role: uwsgi, when: "uwsgi" }
+    - { role: php, when: "php" }

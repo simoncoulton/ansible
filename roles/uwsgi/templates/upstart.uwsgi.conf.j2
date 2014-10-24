@@ -1,0 +1,10 @@
+description "uWSGI Emperor Configuration"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+
+exec uwsgi \
+    --emperor {{ uwsgi_path_app }} \
+    --logto {{ uwsgi_path_log }}

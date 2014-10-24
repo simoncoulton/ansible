@@ -1,0 +1,10 @@
+---
+- name: DB server provisioning
+  hosts:
+    - production
+    - local
+  vars_files:
+    - "{{ secure_dir }}/vars/database.yml"
+  roles:
+    - { role: mysql, when: "mysql" }
+    - { role: postgresql, when: "postgresql" }

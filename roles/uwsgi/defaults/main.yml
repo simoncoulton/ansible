@@ -1,0 +1,14 @@
+---
+# Default variables, can be overridden in group_vars
+
+# Matches with a value from python.virtualenvs
+# creates the uwsgi from that virtualenv
+uwsgi_virtualenv_version: 3.2
+uwsgi_virtualenv_command: virtualenv
+uwsgi_owner: root
+uwsgi_group: root
+uwsgi_mode: '0644'
+uwsgi_path_log: /var/log/uwsgi.log
+uwsgi_path_bin: /usr/local/bin/uwsgi
+uwsgi_path_app: /etc/uwsgi/apps-enabled
+uwsgi_path_upstart: /etc/init/uwsgi.conf

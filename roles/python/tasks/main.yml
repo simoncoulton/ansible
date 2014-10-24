@@ -1,0 +1,13 @@
+---
+- name: Install
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python
+    - python-dev
+    - python{{ python_apt_version }}
+    - python{{ python_apt_version }}-dev
+  tags:
+    - python
+
+- include: pip.yml
+- include: virtualenv.yml

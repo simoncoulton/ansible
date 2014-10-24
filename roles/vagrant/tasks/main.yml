@@ -1,0 +1,22 @@
+---
+# All we're doing here is making sure the virtualhost points to
+# /var/www/public as the root
+- name: Add site configuration
+  template: >
+    src="{{ item.type }}_{{ vagrant.language }}_vhost.j2"
+    dest={{ item.vhost_path }}
+  with_items:
+    - "{{ vagrant.webservers }}"
+  tags:
+    - vagrant
+
+- name: Restart services
+  service: name={{ item.type }} state=restarted
+  with_items:
+    - "{{ vagrant.webservers }}"
+  tags:
+    - vagrant
+
+- name: Restart php-fpm
+  service: name=php5-fpm state=restarted
+  when: php

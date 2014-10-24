@@ -1,0 +1,4 @@
+[local]
+# The vagrantbox IP address, should be the same as what's specified
+# in the Vagrantfile
+192.168.10.145

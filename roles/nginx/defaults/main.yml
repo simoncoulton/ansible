@@ -1,0 +1,34 @@
+---
+# Default variables, can be overridden in group_vars
+nginx_owner: root
+nginx_group: root
+nginx_mode: '0644'
+nginx_user: www-data
+nginx_processes: 4
+nginx_path_www: /var/www
+nginx_path_pid: /run/nginx.pid
+nginx_path_conf: /etc/nginx/nginx.conf
+nginx_path_default_site: /etc/nginx/sites-enabled/default
+
+nginx_conf:
+  nginx:
+    user: ${nginx_user}
+    worker_processes: 4
+    pid: ${nginx_path_pid}
+  http:
+    sendfile: 'on'
+    tcp_nopush: 'on'
+    tcp_nodelay: 'on'
+    keepalive_timeout: 65
+    types_hash_max_size: 2048
+    access_log: /var/log/nginx/access.log
+    error_log: /var/log/nginx/error.log
+    gzip: 'on'
+    gzip_disable: '"msie6"'
+    default_type: application/octet-stream
+  events:
+    worker_connections: 768
+  includes:
+    - /etc/nginx/mime.types
+    - /etc/nginx/conf.d/*.conf
+    - /etc/nginx/sites-enabled/*

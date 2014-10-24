@@ -1,0 +1,27 @@
+{% for key, value in nginx_conf.nginx.iteritems() %}
+{% if value is not none %}
+{{ key }} {{ value }};
+{% endif %}
+{% endfor %}
+
+events {
+    {% for key, value in nginx_conf.events.iteritems() %}
+    {% if value is not none %}
+    {{ key }} {{ value }};
+    {% endif %}
+    {% endfor %}
+
+}
+
+http {
+    {% for key, value in nginx_conf.http.iteritems() %}
+    {% if value is not none %}
+{{ key }} {{ value }};
+    {% endif %}
+    {% endfor %}
+
+    {% for inc in nginx_conf.includes %}
+    include {{ inc }};
+    {% endfor %}
+
+}

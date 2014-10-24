@@ -1,0 +1,5 @@
+---
+# Default variables, can be overridden in group_vars
+git_name: "No Name"
+git_email: "name@git"
+git_config_path: /home/{{ user }}/.gitconfig

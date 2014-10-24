@@ -1,0 +1,35 @@
+---
+- name: Dependencies
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - "{{ php_dependencies }}"
+  tags:
+    - php
+
+- name: Install
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - "{{ php_packages }}"
+  tags:
+    - php
+
+- name: Replace updated php.ini file
+  template: >
+    src={{ item }}.php.ini.j2
+    dest={{ php_ini_path_base }}/{{ item }}/{{ php_ini_name }}
+    owner={{ php_ini_owner }}
+    group={{ php_ini_group }}
+    mode={{ php_ini_mode }}
+  with_items:
+    - apache2
+    - cli
+    - fpm
+  tags:
+    - php
+
+- name: Replace the php5-fpm conf file
+  template: >
+    src=php5-fpm-www.conf.j2
+    dest={{ php_fpm_path_www_conf }}
+  tags:
+    - php

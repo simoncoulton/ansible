@@ -1,0 +1,9 @@
+---
+  - name: Clone oh-my-zsh repo
+    git: repo={{ oh_my_zsh_repo }} dest={{ oh_my_zsh_path }} update=no
+
+  - name: Copy theme
+    template: >
+      src=theme.j2
+      dest={{ oh_my_zsh_path_theme }}
+      owner={{user}}

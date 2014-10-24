@@ -1,0 +1,24 @@
+---
+- name: virtualenv | Install (apt)
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python-virtualenv
+  tags:
+    - python
+
+- name: virtualenv | Create default virtualenvs for virtualenv
+  pip: >
+    name=pep8
+    virtualenv={{ python_path_virtualenv }}/{{ item.version }}
+    virtualenv_command="{{ item.command }} --python=/usr/bin/python{{ item.version }}"
+  with_items:
+    - "{{ python_virtualenvs }}"
+  tags:
+    - python
+
+- name: virtualenv | Copy wrapper for virtualenv
+  copy: src=venv.sh dest={{ python_path_virtualenv }}/{{ item.version }}/bin/venv.sh mode=0755
+  with_items:
+    - "{{ python_virtualenvs }}"
+  tags:
+    - python

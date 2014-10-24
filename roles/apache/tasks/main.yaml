@@ -1,0 +1,40 @@
+---
+- name: Install
+  apt: pkg=apache2 state=installed
+  notify: restart apache
+  tags:
+    - apache
+
+- name: Enable mods
+  command: a2enmod {{ item }}
+  with_items:
+    - "{{ apache_mods.enable }}"
+  when: apache_mods.enable
+  tags:
+    - apache
+
+- name: Disable mods
+  command: a2dismod {{ item }}
+  with_items:
+    - "{{ apache_mods.enable }}"
+  when: apache_mods.disable
+  tags:
+    - apache
+
+
+- name: Replace updated apache2.conf file
+  template: >
+    src=apache2.conf.j2
+    dest={{ apache_path_conf }}
+    owner={{ apache_owner }}
+    group={{ apache_group }}
+    mode={{ apache_mode }}
+  notify: reload apache
+  tags:
+    - apache
+
+- name: Remove Default Site Configuration
+  file: path={{ apache_path_default_site }} state=absent
+  notify: reload apache
+  tags:
+    - apache

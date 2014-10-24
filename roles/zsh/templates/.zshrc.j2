@@ -1,0 +1,11 @@
+ZSH=$HOME/{{ oh_my_zsh_base }}
+ZSH_THEME={{ zsh_theme }}
+
+alias vi="/usr/bin/vim"
+alias pip="noglob pip"
+plugins=(git python pip)
+
+source $ZSH/oh-my-zsh.sh
+
+export PATH=$PATH:./bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/opt/ruby/bin
+export TERM="xterm-256color"

@@ -1,0 +1,13 @@
+---
+# Default variables, can be overridden in group_vars
+common_packages:
+
+common_defaults:
+    - vim
+    - libncurses5-dev
+    - build-essential
+    - unzip
+    - curl
+    - wget
+    - libcurl3
+    - libssl1.0.0

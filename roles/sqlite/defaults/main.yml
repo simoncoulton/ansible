@@ -1,0 +1,4 @@
+---
+# Default variables, can be overridden in group_vars
+sqlite_version: 3-0
+sqlite_dev: 3-dev

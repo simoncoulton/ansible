@@ -1,0 +1,11 @@
+---
+- name: Install
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - mysql-server
+    - libmysqlclient-dev
+
+- name: Write my.cnf
+  action: template src=my.cnf.j2 dest={{ mysql_path_conf }}
+  notify:
+    - restart mysql

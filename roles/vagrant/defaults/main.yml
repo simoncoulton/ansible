@@ -1,0 +1,27 @@
+---
+# OVERRIDE THESE IN YOUR vagrant group_vars, the role will
+# fail without them being set.
+#
+# PHP app for Apache
+# vagrant:
+#   language: php
+#   webservers:
+#     - { type: apache2, vhost_path: /etc/apache2/sites-enabled/000-default }
+
+# PHP app for Nginx
+# vagrant:
+#   language: php
+#   webservers:
+#     - { type: nginx, vhost_path: /etc/nginx/sites-enabled/default }
+
+# Python app for Nginx/uWSGI
+# vagrant:
+#   uwsgi_owner: root
+#   uwsgi_group: root
+#   python_release_version: 3.4
+#   language: python
+#   package: localhost
+#   module: app
+#   webservers:
+#     - { type: uwsgi, vhost_path: /etc/uwsgi/apps-enabled/default.yml }
+#     - { type: nginx, vhost_path: /etc/nginx/sites-enabled/default }

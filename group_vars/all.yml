@@ -1,0 +1,9 @@
+---
+user: ubuntu
+secure_dir: ../secure
+apache: False
+nginx: False
+php: False
+mysql: False
+postgresql: False
+uwsgi: False

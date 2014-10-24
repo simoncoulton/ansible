@@ -1,0 +1,26 @@
+{% for key, value in apache_conf.http.iteritems() %}
+{% if value is not none %}{{ key }} {{ value }}{% endif %}
+
+{% endfor %}
+
+{% for module, values in apache_conf.modules.iteritems() %}
+<IfModule mpm_{{ module }}_module>
+    {% for key, value in values.iteritems() %}
+    {{ key }} {{ value }}
+    {% endfor %}
+</IfModule>
+{% endfor %}
+
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+    Satisfy all
+</Files>
+
+{% for log in apache_conf.log_formats %}
+LogFormat {{ log }}
+{% endfor %}
+
+{% for inc in apache_conf.includes %}
+Include {{ inc }}
+{% endfor %}

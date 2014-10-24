@@ -1,0 +1,14 @@
+{% if php_ini_fpm %}
+{% set actual_ini = php_ini_fpm %}
+{% else %}
+{% set actual_ini = php_ini %}
+{% endif %}
+{% for section, values in actual_ini.iteritems() %}
+[{{ section }}]
+{% if values %}
+{% for key, value in values.iteritems() %}
+{{ key }} = {{ value }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}

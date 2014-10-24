@@ -1,0 +1,41 @@
+---
+- name: Check if uwsgi is built
+  stat: path={{ uwsgi_path_bin }}
+  register: check_uwsgi_built
+  tags:
+    - uwsgi
+
+- name: Install
+  pip: >
+    name=uwsgi
+    virtualenv={{ python_path_virtualenv }}/{{ uwsgi_virtualenv_version }}
+  tags:
+    - uwsgi
+
+- name: Create uWSGI log file
+  file: dest={{ uwsgi_path_log }} mode=777 state=touch
+  tags:
+    - uwsgi
+
+- name: Create app directory
+  file: dest={{ uwsgi_path_app }} state=directory
+  tags:
+    - uwsgi
+
+- name: Configure uWSGI init script
+  notify: restart uwsgi
+  template: >
+    src=upstart.uwsgi.conf.j2
+    dest={{ uwsgi_path_upstart }}
+    owner={{ uwsgi_owner }}
+    group={{ uwsgi_group }}
+    mode={{ uwsgi_mode }}
+  tags:
+    - uwsgi
+
+- name: Copy binary
+  shell: "cp {{ python_path_virtualenv }}/{{ uwsgi_virtualenv_version }}/bin/uwsgi {{ uwsgi_path_bin }} creates={{ uwsgi_path_bin }}"
+  notify: restart uwsgi
+  when: check_uwsgi_built.stat.exists == false
+  tags:
+    - uwsgi

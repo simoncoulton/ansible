@@ -1,0 +1,8 @@
+---
+# Default variables, can be override in group_vars
+zsh_theme: smooth
+zsh_path_zshrc: /home/{{user}}/.zshrc
+oh_my_zsh_repo: https://github.com/robbyrussell/oh-my-zsh.git
+oh_my_zsh_base: .oh-my-zsh
+oh_my_zsh_path: /home/{{ user }}/{{ oh_my_zsh_base }}
+oh_my_zsh_path_theme: "{{ oh_my_zsh_path }}/themes/{{ zsh_theme }}.zsh-theme"

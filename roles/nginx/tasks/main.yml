@@ -1,0 +1,22 @@
+---
+ - name: Install
+   apt: pkg=nginx state=installed
+   tags:
+    - nginx
+
+ - name: Replace updated nginx.conf file
+   template: >
+    src=nginx.conf.j2
+    dest={{ nginx_path_conf }}
+    owner={{ nginx_owner }}
+    group={{ nginx_group }}
+    mode={{ nginx_mode }}
+   notify: reload nginx
+   tags:
+    - nginx
+
+ - name: Remove default site configuration
+   file: path={{ nginx_path_default_site }} state=absent
+   notify: reload nginx
+   tags:
+    - nginx

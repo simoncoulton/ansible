@@ -1,0 +1,64 @@
+---
+# Default variables, can be overridden in group_vars
+apache_owner: root
+apache_group: root
+apache_mode: '0644'
+apache_path_default_site: /etc/apache2/sites-enabled/000-default
+apache_path_conf: /etc/apache2/apache2.conf
+
+apache_mods:
+  enable:
+    - rewrite
+  disable:
+
+apache_conf:
+  http:
+    Timeout: 300
+    KeepAlive: 'On'
+    MaxKeepAliveRequests: 100
+    KeepAliveTimeout: 5
+    AccessFileName: .htaccess
+    AccessFileName: .htaccess
+    DefaultType: 'None'
+    HostnameLookups: 'Off'
+    ErrorLog: '${APACHE_LOG_DIR}/error.log'
+    LogLevel: warn
+    User: '${APACHE_RUN_USER}'
+    Group: '${APACHE_RUN_GROUP}'
+    Mutex: file:${APACHE_LOCK_DIR} default
+    PidFile: '${APACHE_PID_FILE}'
+  modules:
+    prefork:
+      StartServers: 5
+      MinSpareServers: 5
+      MaxSpareServers: 10
+      MaxClients: 150
+      MaxRequestsPerChild: 0
+    worker:
+      StartServers: 2
+      MinSpareThreads: 25
+      MaxSpareThreads: 75
+      ThreadLimit: 64
+      ThreadsPerChild: 25
+      MaxClients: 150
+      MaxRequestsPerChild: 0
+    event:
+      StartServers: 2
+      MinSpareThreads: 25
+      MaxSpareThreads: 75
+      ThreadLimit: 64
+      ThreadsPerChild: 25
+      MaxClients: 150
+      MaxRequestsPerChild: 0
+  includes:
+    - mods-enabled/*.load
+    - mods-enabled/*.conf
+    - ports.conf
+    - conf-enabled/
+    - sites-enabled/
+  log_formats:
+    - '"%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined'
+    - '"%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined'
+    - '"%h %l %u %t \"%r\" %>s %O" common'
+    - '"%{Referer}i -> %U" referer'
+    - '"%{User-agent}i" agent'
