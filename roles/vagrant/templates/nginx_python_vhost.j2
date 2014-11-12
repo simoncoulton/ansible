@@ -5,6 +5,6 @@ server {
 
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:/tmp/uwsgi.{{ vagrant_app.package }}.sock;
+        uwsgi_pass unix:/tmp/uwsgi.{{ vagrant.package }}.sock;
     }
 }
