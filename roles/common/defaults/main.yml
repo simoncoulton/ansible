@@ -11,3 +11,4 @@ common_defaults:
     - wget
     - libcurl3
     - libssl1.0.0
+    - htop
